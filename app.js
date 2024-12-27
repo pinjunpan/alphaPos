@@ -10,10 +10,15 @@ addDrinkButton.addEventListener('click', function () {
     alert('Please choose at least one item.')
     return
   }
+
+  const drink = new Drink(drinkName, sugar, ice)
+  console.log(drink)
+  console.log(drink.price())
 })
 
 // Constructor function for Alpha Pos System
 function AlphaPos () { }
+
 AlphaPos.prototype.getCheckedValue = function (inputName) {
   let selectedOption = ''
   document.querySelectorAll(`[name=${inputName}]`).forEach(function (item) {
