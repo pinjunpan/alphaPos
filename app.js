@@ -4,6 +4,11 @@ function Drink (name, sugar, ice) {
   this.ice = ice
 }
 
+const addDrinkButton = document.querySelector('[data-alpha-pos="add-drink"]')
+addDrinkButton.addEventListener('click', function() {
+  console.log('click')
+})
+
 Drink.prototype.price = function () {
   switch (this.name) {
     case 'Black Tea':
@@ -21,15 +26,3 @@ Drink.prototype.price = function () {
       alert('No this drink')
   }
 }
-
-let blackTea = new Drink('Black Tea', 'Half Sugar', 'No Ice')
-console.log(blackTea)
-console.log(blackTea.price())
-
-let lemonGreenTea = new Drink('Lemon Green Tea', 'No Sugar', 'Less Ice')
-console.log(lemonGreenTea)
-console.log(lemonGreenTea.price())
-
-let matchaLatte = new Drink('Matcha Latte', 'Less Sugar', 'Regular Ice')
-console.log(matchaLatte)
-console.log(matchaLatte.price())
