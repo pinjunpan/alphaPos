@@ -5,7 +5,11 @@ addDrinkButton.addEventListener('click', function () {
   const drinkName = alphaPos.getCheckedValue('drink')
   const ice = alphaPos.getCheckedValue('ice')
   const sugar = alphaPos.getCheckedValue('sugar')
-  console.log(`${drinkName}, ${ice}, ${sugar}`)
+
+  if (!drinkName) {
+    alert('Please choose at least one item.')
+    return
+  }
 })
 
 // Constructor function for Alpha Pos System
