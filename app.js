@@ -31,7 +31,7 @@ orderLists.addEventListener('click', function (event) {
 const checkoutButton = document.querySelector('[data-alpha-pos="checkout"]')
 checkoutButton.addEventListener('click', function() {
   // 1. calculate total amount
-  alphaPos.checkout()
+  alert(`Total amount of drinks：$${alphaPos.checkout()}`)
   // 2. reset the order list
 })
 
@@ -72,10 +72,13 @@ AlphaPos.prototype.deleteDrink = function (target) {
 }
 
 AlphaPos.prototype.checkout = function () {
+  let totalAmount = 0
   document.querySelectorAll('[data-drink-price]').forEach(function(drink) {
     console.log(drink)
     console.log(drink.textContent)
+    totalAmount += Number(drink.textContent)
   })
+  return totalAmount
 }
 
 function Drink (name, sugar, ice) {
