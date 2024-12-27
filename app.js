@@ -14,6 +14,20 @@ addDrinkButton.addEventListener('click', function () {
       console.log(`${option.value}: ${option.checked}`)
     }
   })
+
+  let allIceOptions = document.querySelectorAll('input[name="ice"]')
+  allIceOptions.forEach(function (option) {
+    if (option.checked) {
+      console.log(`${option.value}: ${option.checked}`)
+    }
+  })
+  
+  let allSugarOptions = document.querySelectorAll('input[name="sugar"]')
+  allSugarOptions.forEach(function (option) {
+    if (option.checked) {
+      console.log(`${option.value}: ${option.checked}`)
+    }
+  })
 })
 
 Drink.prototype.price = function () {
