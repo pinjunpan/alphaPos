@@ -1,34 +1,30 @@
+const alphaPos = new AlphaPos()
+
+const addDrinkButton = document.querySelector('[data-alpha-pos="add-drink"]')
+addDrinkButton.addEventListener('click', function () {
+  const drinkName = alphaPos.getCheckedValue('drink')
+  const ice = alphaPos.getCheckedValue('ice')
+  const sugar = alphaPos.getCheckedValue('sugar')
+  console.log(`${drinkName}, ${ice}, ${sugar}`)
+})
+
+// Constructor function for Alpha Pos System
+function AlphaPos () { }
+AlphaPos.prototype.getCheckedValue = function (inputName) {
+  let selectedOption = ''
+  document.querySelectorAll(`[name=${inputName}]`).forEach(function (item) {
+    if (item.checked) {
+      selectedOption = item.value
+    }
+  })
+  return selectedOption
+}
+
 function Drink (name, sugar, ice) {
   this.name = name
   this.sugar = sugar
   this.ice = ice
 }
-
-const addDrinkButton = document.querySelector('[data-alpha-pos="add-drink"]')
-addDrinkButton.addEventListener('click', function () {
-  console.log('click')
-
-  let allDrinksOptions = document.querySelectorAll('input[name="drink"]')
-  allDrinksOptions.forEach(function (option) {
-    if (option.checked) {
-      console.log(`${option.value}: ${option.checked}`)
-    }
-  })
-
-  let allIceOptions = document.querySelectorAll('input[name="ice"]')
-  allIceOptions.forEach(function (option) {
-    if (option.checked) {
-      console.log(`${option.value}: ${option.checked}`)
-    }
-  })
-  
-  let allSugarOptions = document.querySelectorAll('input[name="sugar"]')
-  allSugarOptions.forEach(function (option) {
-    if (option.checked) {
-      console.log(`${option.value}: ${option.checked}`)
-    }
-  })
-})
 
 Drink.prototype.price = function () {
   switch (this.name) {
