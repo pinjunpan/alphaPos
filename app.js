@@ -19,8 +19,12 @@ addDrinkButton.addEventListener('click', function () {
 })
 
 const orderLists = document.querySelector('[data-order-lists]')
-orderLists.addEventListener('click', function(event) {
-  console.log(event.target)
+orderLists.addEventListener('click', function (event) {
+  let isDeleteButton = event.target.matches('[data-alpha-pos="delete-drink"]')
+  if (!isDeleteButton) {
+    return
+  }
+  console.log('do something ...')
 })
 
 // Constructor function for Alpha Pos System
