@@ -5,8 +5,15 @@ function Drink (name, sugar, ice) {
 }
 
 const addDrinkButton = document.querySelector('[data-alpha-pos="add-drink"]')
-addDrinkButton.addEventListener('click', function() {
+addDrinkButton.addEventListener('click', function () {
   console.log('click')
+
+  let allDrinksOptions = document.querySelectorAll('input[name="drink"]')
+  allDrinksOptions.forEach(function (option) {
+    if (option.checked) {
+      console.log(`${option.value}: ${option.checked}`)
+    }
+  })
 })
 
 Drink.prototype.price = function () {
