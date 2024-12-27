@@ -28,6 +28,13 @@ orderLists.addEventListener('click', function (event) {
   alphaPos.deleteDrink(event.target.parentElement.parentElement.parentElement)
 })
 
+const checkoutButton = document.querySelector('[data-alpha-pos="checkout"]')
+checkoutButton.addEventListener('click', function() {
+  // 1. calculate total amount
+  alphaPos.checkout()
+  // 2. reset the order list
+})
+
 // Constructor function for Alpha Pos System
 function AlphaPos () { }
 
@@ -62,6 +69,13 @@ AlphaPos.prototype.addDrink = function (drink) {
 
 AlphaPos.prototype.deleteDrink = function (target) {
   target.remove()
+}
+
+AlphaPos.prototype.checkout = function () {
+  document.querySelectorAll('[data-drink-price]').forEach(function(drink) {
+    console.log(drink)
+    console.log(drink.textContent)
+  })
 }
 
 function Drink (name, sugar, ice) {
