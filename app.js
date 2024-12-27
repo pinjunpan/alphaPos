@@ -24,9 +24,8 @@ orderLists.addEventListener('click', function (event) {
   if (!isDeleteButton) {
     return
   }
-  
-  // get card element
-  console.log(event.target.parentElement.parentElement.parentElement)
+
+  alphaPos.deleteDrink(event.target.parentElement.parentElement.parentElement)
 })
 
 // Constructor function for Alpha Pos System
@@ -59,6 +58,10 @@ AlphaPos.prototype.addDrink = function (drink) {
   </div>
   `
   orderLists.insertAdjacentHTML('afterbegin', orderListsCard)
+}
+
+AlphaPos.prototype.deleteDrink = function (target) {
+  target.remove()
 }
 
 function Drink (name, sugar, ice) {
