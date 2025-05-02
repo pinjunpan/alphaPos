@@ -1,6 +1,8 @@
 const alphaPos = new AlphaPos()
 
 const addDrinkButton = document.querySelector('[data-alpha-pos="add-drink"]')
+const orderLists = document.querySelector('[data-order-lists]')
+
 addDrinkButton.addEventListener('click', function () {
   const drinkName = alphaPos.getCheckedValue('drink')
   const ice = alphaPos.getCheckedValue('ice')
@@ -12,28 +14,30 @@ addDrinkButton.addEventListener('click', function () {
   }
 
   const drink = new Drink(drinkName, sugar, ice)
-  console.log(drink)
-  console.log(drink.price())
-
   alphaPos.addDrink(drink)
 })
 
-const orderLists = document.querySelector('[data-order-lists]')
 orderLists.addEventListener('click', function (event) {
-  let isDeleteButton = event.target.matches('[data-alpha-pos="delete-drink"]')
-  if (!isDeleteButton) {
-    return
+  const isDeleteButton = event.target.matches('[data-alpha-pos="delete-drink"]')
+  const isCheckoutButton = event.target.matches('[data-alpha-pos="checkout"]')
+
+  if (isDeleteButton) {
+    alphaPos.deleteDrink(event.target.parentElement.parentElement.parentElement)
+
+    if (orderLists.querySelectorAll('.card').length === 0) {  
+      // 如果清單都沒飲料，刪除checkout按鈕    
+      const checkoutWrapper = orderLists.querySelector('[data-alpha-pos="checkout"]')?.parentElement
+      if (checkoutWrapper) checkoutWrapper.remove()
+    }
+  }  
+
+  if (isCheckoutButton) {
+    // 1. calculate total amount
+    alert(`Total amount of drinks：$${alphaPos.checkout()}`)
+    // 2. reset the order list
+    alphaPos.clearOrder(orderLists)
+    event.target.parentElement.remove() // 清除結帳按鈕
   }
-
-  alphaPos.deleteDrink(event.target.parentElement.parentElement.parentElement)
-})
-
-const checkoutButton = document.querySelector('[data-alpha-pos="checkout"]')
-checkoutButton.addEventListener('click', function() {
-  // 1. calculate total amount
-  alert(`Total amount of drinks：$${alphaPos.checkout()}`)
-  // 2. reset the order list
-  alphaPos.clearOrder(orderLists)
 })
 
 // Constructor function for Alpha Pos System
@@ -66,6 +70,14 @@ AlphaPos.prototype.addDrink = function (drink) {
   </div>
   `
   orderLists.insertAdjacentHTML('afterbegin', orderListsCard)
+
+  if (!orderLists.querySelector('[data-alpha-pos="checkout"]')) {
+    orderLists.insertAdjacentHTML('beforeend', `
+      <div class="text-right">
+          <button class="btn btn-light" style="min-width:120px;" data-alpha-pos="checkout">Checkout</button>
+      </div>
+    `)
+  }
 }
 
 AlphaPos.prototype.deleteDrink = function (target) {
